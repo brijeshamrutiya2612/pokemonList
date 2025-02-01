@@ -3,6 +3,30 @@ import axios from 'axios';
 import { Card, Row, Col, Button, Spinner, Alert, Form } from 'react-bootstrap';
 import debounce from 'lodash.debounce'; 
 
+const typeColors = {
+  Normal: '#929da3',
+  Fighting: '#ce416b',
+  Flying: '#8fa9de',
+  Poison: '#aa6bc8',
+  Ground: '#d97845',
+  Rock: '#c5b78c',
+  Bug: '#91c12f',
+  Ghost: '#5269ad',
+  Steel: '#5a8ea2',
+  Fire: '#ff9d55',
+  Water: '#5090d6',
+  Grass: '#63bc5a',
+  Electric: '#f4d23c',
+  Psychic: '#fa7179',
+  Ice: '#73cec0',
+  Dragon: '#0b6dc3',
+  Dark: '#5a5465',
+  Fairy: '#ec8fe6',
+  Physical: '#ea551e',
+  Special: '#1c4684',
+  Status: '#999999',
+};
+
 const PokemonList = () => {
   const [fetchPokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -88,23 +112,29 @@ const PokemonList = () => {
       />
 
       <Row>
-        {fetchPokemonList.map((pokemon, index) => (
-          <Col sm={12} md={6} lg={4} key={index}>
-            <Card className="mb-4">
-              <Card.Img 
-                variant="top" 
-                src={pokemon?.image?.thumbnail || 'https://via.placeholder.com/150'} 
-                alt={`${pokemon.name.english} image`} 
-              />
-              <Card.Body>
-                <Card.Title>{pokemon.name.english}</Card.Title>
-                <Card.Text>
-                  <strong>Type:</strong> {pokemon?.type?.join(', ') || 'N/A'}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+        {fetchPokemonList.map((pokemon, index) => {
+          const cardBgColor = pokemon?.type?.length
+            ? typeColors[pokemon.type[0]] || '#fff'
+            : '#fff';
+
+          return (
+            <Col sm={12} md={6} lg={4} key={index}>
+              <Card className="mb-4" style={{ backgroundColor: cardBgColor }}>
+                <Card.Img 
+                  variant="top" 
+                  src={pokemon?.image?.thumbnail || 'https://via.placeholder.com/150'} 
+                  alt={`${pokemon.name.english} image`} 
+                />
+                <Card.Body>
+                  <Card.Title>{pokemon.name.english}</Card.Title>
+                  <Card.Text>
+                    <strong>Type:</strong> {pokemon?.type?.join(', ') || 'N/A'}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })}
         
         {hasMore && !loading && fetchPokemonList.length > 0 && (
           <div className="text-center mt-4">
