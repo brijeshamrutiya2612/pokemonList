@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Card, Row, Col, Spinner } from 'react-bootstrap';
 
 const PokemonList = () => {
-  const [pokemonList, setPokemonList] = useState([]);
+  const [fetchPokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -12,8 +12,10 @@ const PokemonList = () => {
       try {
         const response = await axios.get(`http://localhost:5000/v1/pokemon`);
 
+        console.log("response10010",response)
+
         if (response.data) {
-          setPokemonList(response.data.data);
+          setPokemonList(response?.data?.data);
         }
       } catch (err) {
         setError('Failed to fetch Pokémon data');
@@ -42,17 +44,17 @@ const PokemonList = () => {
     <div className="container mt-5">
       <h2>Pokémon List</h2>
       <Row>
-        {pokemonList.map((pokemon, index) => (
+        {fetchPokemonList.map((pokemon, index) => (
           <Col sm={12} md={6} lg={4} key={index}>
             <Card className="mb-4">
-              <Card.Img variant="top" src={pokemon?.image || 'https://via.placeholder.com/150'} />
+              <Card.Img variant="top" src={pokemon?.image?.thumbnail || 'https://via.placeholder.com/150'} />
               <Card.Body>
-                <Card.Title>{pokemon.name}</Card.Title>
+                <Card.Title>{pokemon.name.english}</Card.Title>
                 <Card.Text>
                   <strong>Type:</strong> {pokemon?.type}
                 </Card.Text>
                 <Card.Text>
-                  <strong>Abilities:</strong> {pokemon?.abilities.join(', ')}
+                  {/* <strong>Abilities:</strong> {pokemon?.abilities.join(', ')} */}
                 </Card.Text>
               </Card.Body>
             </Card>
