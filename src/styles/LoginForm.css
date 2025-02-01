@@ -4,6 +4,9 @@
     
   }
   
+  .space{
+    margin-bottom:2em;
+  }
   .login-form {
     padding: 30px;
     background-color: #f9f9f9;

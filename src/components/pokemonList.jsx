@@ -53,9 +53,6 @@ const PokemonList = () => {
                 <Card.Text>
                   <strong>Type:</strong> {pokemon?.type}
                 </Card.Text>
-                <Card.Text>
-                  {/* <strong>Abilities:</strong> {pokemon?.abilities.join(', ')} */}
-                </Card.Text>
               </Card.Body>
             </Card>
           </Col>

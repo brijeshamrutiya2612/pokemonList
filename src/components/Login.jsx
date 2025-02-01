@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
-import '../styles/LoginForm.css'; 
-import axios from 'axios'; 
+import '../styles/LoginForm.css';
+import axios from 'axios';
 // import {useNavigate} from 'react-router-dom';
 
 const LoginForm = () => {
@@ -29,7 +29,7 @@ const LoginForm = () => {
 
       if (response.data) {
         console.log('Login successful', response.data);
-            }
+      }
     } catch (err) {
       setError('Invalid credentials, please try again.');
     } finally {
@@ -38,32 +38,35 @@ const LoginForm = () => {
   };
 
   return (
-    <Container className="login-container">
-      <Row className="justify-content-center">
+    <Container className='login-container'>
+      <Row className='justify-content-center'>
         <Col md={6}>
-          <div className="login-form">
-            <h2 className="text-center">Login to Pokedex</h2>
+          <div className='login-form'>
+            <h2 className='text-center'>Login to Pokedex</h2>
             <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formEmail">
+              <Form.Group controlId='formEmail' className="space">
                 <Form.Control
-                  type="email"
-                  placeholder="Email address"
+                  type='email'
+                  placeholder='Email address'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formPassword">
+              <Form.Group controlId='formPassword'>
                 <Form.Control
-                  type="password"
-                  placeholder="Password"
+                  type='password'
+                  placeholder='Password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
               {error && <p style={{ color: 'red' }}>{error}</p>}
-              <Button type="submit" className="btn-block">
-              {loading ? 'Logging in...' : 'Login'}
+              <Button
+                type='submit'
+                className='btn-block'
+              >
+                {loading ? 'Logging in...' : 'Login'}
               </Button>
             </Form>
           </div>
