@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import '../styles/LoginForm.css';
 import axios from 'axios';
-// import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,6 +29,7 @@ const LoginForm = () => {
 
       if (response.data) {
         console.log('Login successful', response.data);
+        navigate("/pokemonlist")
       }
     } catch (err) {
       setError('Invalid credentials, please try again.');
@@ -36,6 +37,10 @@ const LoginForm = () => {
       setLoading(false);
     }
   };
+
+  const handleCreateSignUpForm = () =>{
+    navigate("/signup")
+  }
 
   return (
     <Container className='login-container'>
@@ -69,6 +74,14 @@ const LoginForm = () => {
                 {loading ? 'Logging in...' : 'Login'}
               </Button>
             </Form>
+              <Button
+                onClick={handleCreateSignUpForm}
+                variant="primary"
+                type='submit'
+                className='btn-block'
+              >
+                Sign Up
+              </Button>
           </div>
         </Col>
       </Row>
