@@ -1,0 +1,15 @@
+.navbar_main{
+    background-color:#f34d61;
+    color:white;
+}
+.nav_section{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:80%;
+    padding:0px 50px 0px 50px;
+    height:100px;
+}
+.h3{
+    text-align:left;
+}
